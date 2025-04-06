@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronomy Salon - Cosmic Beauty Redefined</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Custom CSS - Refined Cosmic Theme */
+        :root {
+            --color-cosmic-deep: #1d3557; /* Deep blue */
+            --color-cosmic-medium: #457b9d; /* Medium blue */
+            --color-celestial-light: #a8dadc; /* Light cyan */
+            --color-stellar-glow: #f1faee; /* Off-white */
+            --color-accent-nebula: #e63946; /* Optional accent (like a nebula) */
+        }
+
+        body {
+            background-color: var(--color-cosmic-deep);
+            color: var(--color-stellar-glow);
+            font-family: 'Inter', sans-serif; /* Example modern font */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Link Styling */
+        nav a, .footer-link {
+            position: relative;
+            transition: color 0.3s ease-in-out;
+            padding-bottom: 4px; /* Space for underline */
+        }
+        nav a::after, .footer-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-celestial-light);
+            transition: width 0.3s ease-in-out;
+        }
+        nav a:hover, .footer-link:hover,
+        nav a:focus, .footer-link:focus {
+            color: var(--color-celestial-light);
+        }
+        nav a:hover::after, .footer-link:hover::after,
+        nav a:focus::after, .footer-link:focus::after {
+            width: 100%;
+        }
+
+        /* Custom Button Style */
+        .btn {
+            @apply inline-block font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-lg;
+        }
+        .btn-primary {
+            @apply bg-celestial-light text-cosmic-deep hover:bg-stellar-glow hover:shadow-xl;
+        }
+        .btn-secondary {
+            @apply bg-cosmic-medium text-stellar-glow hover:bg-celestial-light hover:text-cosmic-deep hover:shadow-xl;
+        }
+        .btn-outline {
+             @apply bg-transparent border-2 border-celestial-light text-celestial-light hover:bg-celestial-light hover:text-cosmic-deep hover:shadow-xl;
+        }
+
+        /* Glassmorphism Header on Scroll */
+        .header-scrolled {
+            background-color: rgba(29, 53, 87, 0.8); /* Semi-transparent deep blue */
+            @apply backdrop-blur-md shadow-xl;
+        }
+
+        /* Service Card Hover Effect */
+        .service-card {
+            @apply bg-cosmic-medium p-6 rounded-xl shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl;
+        }
+        .service-card h3 {
+            @apply text-xl font-bold text-celestial-light mb-3;
+        }
+        .service-card p, .service-card ul {
+            @apply text-stellar-glow opacity-90;
+        }
+         .service-card ul {
+             @apply list-disc list-inside space-y-1 mt-4;
+         }
+
+        /* Placeholder for 3D Background */
+        #threejs-canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind content */
+            overflow: hidden;
+        }
+
+        /* Improve focus visibility */
+         *:focus-visible {
+            outline: 2px solid var(--color-celestial-light);
+            outline-offset: 2px;
+         }
+
+        /* Simple Section Divider Example (Optional) */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--color-celestial-light), transparent);
+            opacity: 0.3;
+            margin: 4rem 0;
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-cosmic-deep text-stellar-glow font-sans" x-data="{ scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 50)">
+
+    <div id="threejs-canvas-container">
+        </div>
+
+    <header :class="{ 'header-scrolled': scrolled }" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" >
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-celestial-light hover:text-white transition duration-300">
+                Astronomy Salon
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="md:hidden">
+                <button class="text-stellar-glow focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+            </div>
+    </header>
+
+    <div class="relative z-10"> <section id="home" class="min-h-screen flex items-center justify-center text-center px-6 pt-24 pb-12 relative overflow-hidden">
+             <div class="relative z-10" data-aos="fade-up">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight text-stellar-glow">
+                    Discover Your <span class="text-celestial-light">Cosmic Radiance</span>
+                </h1>
+                <p class="text-lg md:text-xl text-celestial-light opacity-90 mb-8 max-w-2xl mx-auto">
+                    Step into Astronomy Salon, where stellar style meets serene self-care. Let our expert artists guide you on a transformative journey to unveil your unique brilliance.
+                </p>
+                <a href="#contact" class="btn btn-primary mr-4">Book Your Appointment</a>
+                 <a href="#services" class="btn btn-outline">Explore Services</a>
+            </div>
+             <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-celestial-light animate-bounce hidden md:block">
+                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+
+             </div>
+        </section>
+
+        <section id="philosophy" class="py-16 md:py-24 bg-opacity-10 bg-black"> <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl md:text-4xl font-semibold text-celestial-light mb-6" data-aos="fade-up">Beauty Beyond the Horizon</h2>
+                 <p class="text-lg text-stellar-glow opacity-90 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Inspired by the boundless beauty of the cosmos, we believe self-care is a journey of discovery. At Astronomy Salon, we blend artistry with tranquility, using premium, mindful products to enhance your natural glow. Every individual shines uniquely – let us help illuminate your star.
+                 </p>
+             </div>
+        </section>
+
+        <section id="services" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-semibold text-celestial-light mb-12 text-center" data-aos="fade-up">Our Galaxy of Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="service-card" data-aos="fade-up">
+                        <div class="text-celestial-light mb-3"></div>
+                        <h3>Celestial Hair Design</h3>
+                        <p>From precision cuts to flowing styles and intricate updos, discover your signature look.</p>
+                        <ul class="text-sm">
+                            <li>Celestial Cuts & Styling</li>
+                            <li>Nebula Blowouts & Waves</li>
+                            <li>Galaxy Braids & Updos</li>
+                            <li>Men's Cosmic Grooming</li>
+                        </ul>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Starlight Color & Treatments</h3>
+                        <p>Illuminate your hair with vibrant hues and nourishing therapies for stellar shine.</p>
+                        <ul class="text-sm">
+                             <li>Starlight Highlights & Balayage</li>
+                             <li>Dark Matter All-Over Color</li>
+                             <li>Aurora Gloss & Toners</li>
+                             <li>Deep Space Repair Treatments</li>
+                             <li>Planet-Friendly Options</li>
+                        </ul>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Lunar Skin & Body</h3>
+                        <p>Rejuvenate your skin and relax your body with treatments inspired by cosmic calm.</p>
+                         <ul class="text-sm">
+                             <li>Milky Way Radiance Facials</li>
+                             <li>Supernova Exfoliating Scrubs</li>
+                             <li>Asteroid Hot Stone Massage</li>
+                             <li>Zero-Gravity Body Wraps</li>
+                             <li>Cosmic Calm Aromatherapy</li>
+                        </ul>
+                    </div>
+                    <div class="service-card" data-aos="fade-up">
+                        <h3>Galactic Nail Artistry</h3>
+                        <p>Adorn your nails with out-of-this-world designs, colors, and finishes.</p>
+                        <ul class="text-sm">
+                            <li>Constellation Manicures</li>
+                            <li>Meteor Shower Pedicures</li>
+                            <li>Space Dust Gel Polish</li>
+                            <li>Nebula Nail Enhancements</li>
+                            <li>Cosmic Chrome & Effects</li>
+                        </ul>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Smooth Orbit Waxing</h3>
+                        <p>Achieve flawlessly smooth skin with our gentle and effective hair removal services.</p>
+                         <ul class="text-sm">
+                             <li>Full Body Star Wax</li>
+                             <li>Orion Brow Design</li>
+                             <li>Precision Facial Waxing</li>
+                             <li>Venus Leg & Arm Waxing</li>
+                             <li>Gentle Formulas Available</li>
+                        </ul>
+                    </div>
+                     <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Event Horizon Styling</h3>
+                        <p>Shine brightest for your special moments with our dedicated event packages.</p>
+                        <ul class="text-sm">
+                             <li>Bridal Galaxy Packages</li>
+                             <li>Prom Night Star Styling</li>
+                             <li>Red Carpet Transformations</li>
+                             <li>Photoshoot Ready Looks</li>
+                             <li>Group Celebration Prep</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center mt-12" data-aos="fade-up">
+                     <a href="/full-menu" class="btn btn-secondary">View Full Service Menu</a>
+                     <p class="text-sm text-stellar-glow opacity-70 mt-4">Contact us for custom packages and consultations.</p>
+                 </div>
+            </div>
+        </section>
+
+        <div class="section-divider container mx-auto px-6"></div>
+
+        <section id="gallery" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-semibold text-celestial-light mb-12 text-center" data-aos="fade-up">Our Stellar Work</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="aspect-square bg-cosmic-medium rounded-lg flex items-center justify-center text-center p-4 flex-col shadow-lg" data-aos="zoom-in">
+                         <div class="w-12 h-12 bg-celestial-light rounded-full mb-3 opacity-50"></div> <h4 class="font-semibold text-lg text-stellar-glow mb-1">Nebula Hair Transformation</h4>
+                        <p class="text-sm text-stellar-glow opacity-80">Vibrant color blend mimicking cosmic clouds.</p>
+                    </div>
+                     <div class="aspect-square bg-cosmic-medium rounded-lg flex items-center justify-center text-center p-4 flex-col shadow-lg" data-aos="zoom-in" data-aos-delay="100">
+                          <div class="w-12 h-12 bg-celestial-light rounded-full mb-3 opacity-50"></div> <h4 class="font-semibold text-lg text-stellar-glow mb-1">Lunar Glow Facial Results</h4>
+                         <p class="text-sm text-stellar-glow opacity-80">Before & After showcasing radiant skin.</p>
+                     </div>
+                     <div class="aspect-square bg-cosmic-medium rounded-lg flex items-center justify-center text-center p-4 flex-col shadow-lg" data-aos="zoom-in" data-aos-delay="200">
+                         <div class="w-12 h-12 bg-celestial-light rounded-full mb-3 opacity-50"></div> <h4 class="font-semibold text-lg text-stellar-glow mb-1">Galaxy Bridal Updo</h4>
+                         <p class="text-sm text-stellar-glow opacity-80">Elegant and intricate styling for a special day.</p>
+                    </div>
+                    </div>
+                <div class="text-center mt-12" data-aos="fade-up">
+                    <a href="/gallery-full" class="btn btn-outline">View Full Gallery</a>
+                 </div>
+            </div>
+        </section>
+
+         <div class="section-divider container mx-auto px-6"></div>
+
+        <section id="testimonials" class="py-16 md:py-24 bg-opacity-10 bg-black">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-semibold text-celestial-light mb-12 text-center" data-aos="fade-up">Client Constellations</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-cosmic-medium p-6 rounded-xl shadow-lg" data-aos="fade-up">
+                        <p class="text-stellar-glow italic mb-4">"Absolutely stellar experience! The atmosphere is so calming, and my stylist really listened. I feel like a new constellation!"</p>
+                        <p class="font-semibold text-celestial-light">- Chandra P.</p>
+                    </div>
+                     <div class="bg-cosmic-medium p-6 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                         <p class="text-stellar-glow italic mb-4">"The 'Milky Way Facial' was divine. My skin has never felt so refreshed and bright. Highly recommend this oasis."</p>
+                         <p class="font-semibold text-celestial-light">- Rohan S.</p>
+                     </div>
+                     <div class="bg-cosmic-medium p-6 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <p class="text-stellar-glow italic mb-4">"I came for a simple trim and left with a masterpiece! The team is incredibly talented and passionate. Found my new salon."</p>
+                        <p class="font-semibold text-celestial-light">- Anika D.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                 <h2 class="text-3xl md:text-4xl font-semibold text-celestial-light mb-12 text-center" data-aos="fade-up">Our Cosmic Story</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div data-aos="fade-right">
+                        <h3 class="text-2xl font-semibold text-celestial-light mb-4">Our Guiding Stars</h3>
+                        <p class="text-stellar-glow opacity-90 mb-6">
+                            Astronomy Salon was born from a passion for blending the art of beauty with the tranquility of the cosmos. We envision a sanctuary where clients escape the ordinary and reconnect with their inner radiance. Our mission is to provide exceptional, personalized care in an inspiring atmosphere, celebrating individual beauty like the unique stars in the night sky.
+                        </p>
+                         <p class="text-stellar-glow opacity-90">
+                             We are committed to using high-quality, ethically-sourced products and staying ahead of celestial trends through continuous learning. Your comfort, satisfaction, and well-being are our universe.
+                         </p>
+                    </div>
+                    <div data-aos="fade-left">
+                        <h3 class="text-2xl font-semibold text-celestial-light mb-4">Meet Our Constellation Crew</h3>
+                        <p class="text-stellar-glow opacity-90 mb-6">
+                           Our team is a constellation of passionate, skilled artists dedicated to making you shine. Each member brings unique talents and a shared commitment to stellar service. Get to know the experts who make Astronomy Salon a truly heavenly experience.
+                        </p>
+                        <div class="flex space-x-4 mb-6">
+                            <div class="w-16 h-16 bg-celestial-light rounded-full opacity-50 flex items-center justify-center text-cosmic-deep font-bold">T1</div>
+                             <div class="w-16 h-16 bg-celestial-light rounded-full opacity-50 flex items-center justify-center text-cosmic-deep font-bold">T2</div>
+                             <div class="w-16 h-16 bg-celestial-light rounded-full opacity-50 flex items-center justify-center text-cosmic-deep font-bold">T3</div>
+                             </div>
+                        <a href="/team" class="btn btn-secondary">Meet the Full Team</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider container mx-auto px-6"></div>
+
+        <section id="blog" class="py-16 md:py-24">
+             <div class="container mx-auto px-6">
+                 <h2 class="text-3xl md:text-4xl font-semibold text-celestial-light mb-12 text-center" data-aos="fade-up">Cosmic Insights</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                     <div class="bg-cosmic-medium p-6 rounded-xl shadow-lg flex flex-col" data-aos="fade-up">
+                         <div class="h-40 bg-stellar-glow rounded-md mb-4 opacity-20"></div> <h4 class="text-lg font-semibold text-celestial-light mb-2">Trending: Nebula Nail Art</h4>
+                         <p class="text-sm text-stellar-glow opacity-80 mb-4 flex-grow">Explore the latest trend in nail design inspired by the vibrant colors of space nebulae...</p>
+                         <a href="/blog/post1" class="text-celestial-light hover:text-white font-semibold text-sm self-start">Read More &rarr;</a>
+                     </div>
+                     <div class="bg-cosmic-medium p-6 rounded-xl shadow-lg flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                         <div class="h-40 bg-stellar-glow rounded-md mb-4 opacity-20"></div> <h4 class="text-lg font-semibold text-celestial-light mb-2">5 Tips for Starlit Skin</h4>
+                         <p class="text-sm text-stellar-glow opacity-80 mb-4 flex-grow">Achieve a radiant complexion with these essential skincare tips from our expert estheticians...</p>
+                         <a href="/blog/post2" class="text-celestial-light hover:text-white font-semibold text-sm self-start">Read More &rarr;</a>
+                     </div>
+                      <div class="bg-cosmic-medium p-6 rounded-xl shadow-lg flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                         <div class="h-40 bg-stellar-glow rounded-md mb-4 opacity-20"></div> <h4 class="text-lg font-semibold text-celestial-light mb-2">Choosing Your Cosmic Hair Color</h4>
+                          <p class="text-sm text-stellar-glow opacity-80 mb-4 flex-grow">From deep space blues to fiery supernova reds, find the perfect cosmic hue for you...</p>
+                         <a href="/blog/post3" class="text-celestial-light hover:text-white font-semibold text-sm self-start">Read More &rarr;</a>
+                     </div>
+                 </div>
+                  <div class="text-center mt-12" data-aos="fade-up">
+                     <a href="/blog" class="btn btn-outline">Visit Our Blog</a>
+                 </div>
+             </div>
+        </section>
+
+        <section id="contact" class="py-16 md:py-24 bg-cosmic-medium"> <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-semibold text-celestial-light mb-12 text-center" data-aos="fade-up">Reach for the Stars</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div data-aos="fade-right">
+                        <h3 class="text-2xl font-semibold text-celestial-light mb-6">Connect with Us</h3>
+                        <p class="text-stellar-glow opacity-90 mb-6">
+                            Ready to book your stellar experience or have a question? We're here to help. Reach out via phone, email, or visit our salon in Colombo.
+                        </p>
+                        <ul class="space-y-4 text-stellar-glow">
+                            <li class="flex items-center">
+                                <span class="text-celestial-light mr-3">&#9733;</span>
+                                <strong>Address:</strong>&nbsp; 123 Galaxy Way, Colombo 05, Sri Lanka
+                            </li>
+                             <li class="flex items-center">
+                                <span class="text-celestial-light mr-3">&#9742;</span>
+                                <strong>Phone:</strong>&nbsp; <a href="tel:+9411XXXXXXX" class="hover:text-celestial-light transition duration-300">+94 11 XXX XXXX</a>
+                            </li>
+                             <li class="flex items-center">
+                                <span class="text-celestial-light mr-3">&#9993;</span>
+                                <strong>Email:</strong>&nbsp; <a href="mailto:info@astronomysalon.com" class="hover:text-celestial-light transition duration-300">info@astronomysalon.com</a>
+                            </li>
+                             <li class="flex items-center">
+                                <span class="text-celestial-light mr-3">&#9200;</span>
+                                <strong>Hours:</strong>&nbsp; Tue-Sun: 9:00 AM - 7:00 PM (Closed Mondays)
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <div class="aspect-video bg-cosmic-deep rounded-lg flex items-center justify-center text-stellar-glow opacity-50">
+                                Map Placeholder
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-aos="fade-left">
+                         <h3 class="text-2xl font-semibold text-celestial-light mb-6">Send a Cosmic Message</h3>
+                        <form action="#" method="POST" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-celestial-light">Full Name</label>
+                                <input type="text" id="name" name="name" required
+                                       class="mt-1 block w-full py-2 px-3 bg-stellar-glow text-cosmic-deep border border-cosmic-deep rounded-md shadow-sm focus:ring-celestial-light focus:border-celestial-light sm:text-sm">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-celestial-light">Email Address</label>
+                                <input type="email" id="email" name="email" required
+                                       class="mt-1 block w-full py-2 px-3 bg-stellar-glow text-cosmic-deep border border-cosmic-deep rounded-md shadow-sm focus:ring-celestial-light focus:border-celestial-light sm:text-sm">
+                            </div>
+                             <div>
+                                <label for="service" class="block text-sm font-medium text-celestial-light">Service of Interest (Optional)</label>
+                                <select id="service" name="service"
+                                        class="mt-1 block w-full py-2 px-3 bg-stellar-glow text-cosmic-deep border border-cosmic-deep rounded-md shadow-sm focus:ring-celestial-light focus:border-celestial-light sm:text-sm">
+                                    <option>General Inquiry</option>
+                                    <option>Haircuts & Styling</option>
+                                    <option>Color & Treatments</option>
+                                    <option>Skin & Body</option>
+                                    <option>Nail Artistry</option>
+                                    <option>Waxing</option>
+                                     <option>Bridal & Events</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-celestial-light">Your Message</label>
+                                <textarea id="message" name="message" rows="4" required
+                                          class="mt-1 block w-full py-2 px-3 bg-stellar-glow text-cosmic-deep border border-cosmic-deep rounded-md shadow-sm focus:ring-celestial-light focus:border-celestial-light sm:text-sm"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary w-full">Launch Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div> <footer class="bg-cosmic-deep border-t border-celestial-light border-opacity-20 py-12 mt-16">
+        <div class="container mx-auto px-6 text-center text-stellar-glow opacity-80">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-left">
+                <div>
+                     <h4 class="font-semibold text-celestial-light mb-3">Astronomy Salon</h4>
+                     <p class="text-sm mb-4">Discover your cosmic radiance at Colombo's premier destination for stellar beauty and serene self-care.</p>
+                     <div class="flex space-x-4">
+                        <a href="#" class="footer-link">FB</a>
+                        <a href="#" class="footer-link">IG</a>
+                        <a href="#" class="footer-link">TW</a>
+                    </div>
+                 </div>
+                 <div>
+                     <h4 class="font-semibold text-celestial-light mb-3">Quick Links</h4>
+                     <ul class="space-y-2 text-sm">
+                         <li><a href="#services" class="footer-link">Services</a></li>
+                         <li><a href="#gallery" class="footer-link">Gallery</a></li>
+                         <li><a href="/blog" class="footer-link">Blog</a></li>
+                         <li><a href="#contact" class="footer-link">Book Now</a></li>
+                         <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+                     </ul>
+                 </div>
+                <div>
+                     <h4 class="font-semibold text-celestial-light mb-3">Contact Us</h4>
+                     <ul class="space-y-2 text-sm">
+                         <li>123 Galaxy Way, Colombo 05</li>
+                         <li>+94 11 XXX XXXX</li>
+                         <li>info@astronomysalon.com</li>
+                         <li>Tue-Sun: 9am - 7pm</li>
+                     </ul>
+                 </div>
+            </div>
+            <p class="text-sm">&copy; 2025 Astronomy Salon. All rights reserved. Designed with cosmic care.</p>
+             <p class="text-xs opacity-60 mt-2">Powered by Starlight & Code</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.150.1/build/three.module.js"
+        }
+      }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+
+        // --- Basic Three.js Setup ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true }); // alpha: true for transparent background
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio); // Adjust for screen density
+        const container = document.getElementById('threejs-canvas-container');
+        if (container) {
+            container.appendChild(renderer.domElement);
+        } else {
+            console.error("Three.js container not found!");
+        }
+
+
+        // --- Example: Simple Starfield ---
+        const starGeometry = new THREE.BufferGeometry();
+        const starMaterial = new THREE.PointsMaterial({
+            color: 0xa8dadc, // Celestial Light
+            size: 0.005, // Adjust size
+            sizeAttenuation: true
+         });
+
+        const starVertices = [];
+        for (let i = 0; i < 10000; i++) { // Number of stars
+             const x = (Math.random() - 0.5) * 20; // Spread stars across a volume
+             const y = (Math.random() - 0.5) * 20;
+             const z = (Math.random() - 0.5) * 20;
+             starVertices.push(x, y, z);
+        }
+
+        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+        const stars = new THREE.Points(starGeometry, starMaterial);
+        scene.add(stars);
+
+        camera.position.z = 5; // Move camera back
+
+        // --- Handle Window Resize ---
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- Animation Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Subtle rotation
+            stars.rotation.x += 0.0001;
+            stars.rotation.y += 0.0002;
+
+            renderer.render(scene, camera);
+        }
+
+        // Only start animation if renderer was successfully added
+        if (container) {
+           animate();
+        }
+
+        // --- AOS Initialization ---
+        AOS.init({
+            duration: 800, // Animation duration
+            once: true, // Animate only once
+            offset: 50, // Trigger offset
+        });
+
+        // --- Smooth Scroll (already handled by CSS html.scroll-smooth) ---
+        // Optional: Add JS fallback or more complex logic if needed
+
+         // --- Header Scroll Effect ---
+         // Alpine.js handles this with x-data and @scroll.window in the body tag
+
+    </script>
+</body>
+</html>
